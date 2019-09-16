@@ -11,4 +11,4 @@ In the following project I use the following tools and python packages in order 
 - Airflow: Created a simple dag which firstly runs the web scrapers, it then runs the script which concats the next fixtures + odds together before finishing with the script which actually forms the predictions using the mojo file.
 
 
-Thanks to Australia Sports Betting for providing the inital dataset.
+Thanks to Australia Sports Betting for providing the initial dataset.
