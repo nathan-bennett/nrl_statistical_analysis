@@ -1,4 +1,4 @@
-# nrl_analysis
+# NRL Statistical Analysis
 Statistical Analysis of the NRL
 
 In the following project I use the following tools and python packages in order to analyse the NRL:
