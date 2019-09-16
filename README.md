@@ -1,5 +1,4 @@
-# NRL Statistical Analysis
-Statistical Analysis of the NRL
+# Statistical Analysis of the NRL
 
 In the following project I use the following tools and python packages in order to analyse the NRL:
 - Optimus: I use this python package to clean the dataset found on this website http://www.aussportsbetting.com/data/historical-nrl-results-and-odds-data/
