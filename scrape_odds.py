@@ -16,7 +16,7 @@ def get_driver(path, url):
 
 
 def get_teams():
-    teams = [
+    nrl_teams = [
         'Parramatta Eels',
         'Canterbury Bulldogs',
         'Canberra Raiders',
@@ -34,7 +34,7 @@ def get_teams():
         'St. George Illawarra Dragons',
         'Wests Tigers',
     ]
-    return teams
+    return nrl_teams
 
 
 def get_games(driver, nrl_teams, future):
@@ -43,13 +43,13 @@ def get_games(driver, nrl_teams, future):
         css_selection = "#tournamentTable"
     raw_text = driver.find_elements_by_css_selector(css_selection)[0].text
     raw_text_split = raw_text.split("\n")[5:]
-    raw_text_split = [i if i != '-' else str(1.00) for i in raw_text_split]
+    raw_text_split_formatted = [i if i != '-' else str(1.00) for i in raw_text_split]
 
     games = []
-    for index in range(len(raw_text_split)):
+    for index in range(len(raw_text_split_formatted)):
         game = dict()
         try:
-            match_up_split = raw_text_split[index]
+            match_up_split = raw_text_split_formatted[index]
             game['time'] = datetime.strptime(match_up_split.split(' ')[0], "%H:%M")
             teams = dict()
             for nrl_team in nrl_teams:
@@ -63,18 +63,18 @@ def get_games(driver, nrl_teams, future):
                 else:
                     game['home_team'] = teams[keys[1]]
                     game['away_team'] = teams[keys[0]]
-            game['home_odds'] = float(raw_text_split[index + 1])
+            game['home_odds'] = float(raw_text_split_formatted[index + 1])
             if not future:
                 scores = match_up_split.split(' ')[-1].split(":")
                 game['home_score'] = float(scores[0])
                 game['away_score'] = float(scores[1])
-            game['draw_odds'] = float(raw_text_split[index + 2])
-            game['away_odds'] = float(raw_text_split[index + 3])
+            game['draw_odds'] = float(raw_text_split_formatted[index + 2])
+            game['away_odds'] = float(raw_text_split_formatted[index + 3])
             game['str_index'] = index
             games.append(game)
         except ValueError:
             continue
-    return games, raw_text_split
+    return games, raw_text_split_formatted
 
 
 def get_dates(raw_text_split, year):
