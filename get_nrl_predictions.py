@@ -21,7 +21,7 @@ pd.set_option('display.max_columns', 500)
 def get_data_from_db(db_path):
     conn = sqlite3.connect(db_path)
 
-    odds = pd.read_sql_query("SELECT * FROM odds_and_fixtures", conn)
+    odds = pd.read_sql_query("SELECT * FROM future_odds", conn)
 
     odds.drop_duplicates(['home_team', 'away_team'], inplace=True)
 
@@ -32,7 +32,7 @@ def get_data_from_db(db_path):
                 inplace=True)
 
     odds['date'] = pd.to_datetime(odds['date'])
-    odds['Date'] = odds['date']
+    odds['Date'] = odds['game_date']
     odds['Kick-off (local)'] = odds['date']
     odds['Home Score'] = np.nan
     odds['Away Score'] = np.nan

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 start=$1
 end=$2
 
